@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://nodes/instructions.gd" type="Script" id=1]
+[ext_resource path="res://sprites/spr_title/instructions_background.png" type="Texture" id=2]
+[ext_resource path="res://sprites/spr_title/instructions.png" type="Texture" id=3]
+[ext_resource path="res://sprites/spr_title/title_inst.png" type="Texture" id=4]
+[ext_resource path="res://sprites/spr_ui/esc_2.png" type="Texture" id=5]
+[ext_resource path="res://nodes/sfx.tscn" type="PackedScene" id=6]
+
+[node name="instructions" type="Node2D"]
+
+script/script = ExtResource( 1 )
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+centered = false
+
+[node name="instr" type="Sprite" parent="."]
+
+transform/pos = Vector2( 130, 375 )
+transform/scale = Vector2( 0.239422, 0.240793 )
+texture = ExtResource( 3 )
+
+[node name="continue" type="Sprite" parent="."]
+
+transform/pos = Vector2( 890, 366 )
+transform/scale = Vector2( 0.249492, 0.291144 )
+texture = ExtResource( 4 )
+
+[node name="esc" type="Sprite" parent="."]
+
+transform/pos = Vector2( 898, 480 )
+transform/scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 5 )
+
+[node name="sfx" parent="." instance=ExtResource( 6 )]
+
+

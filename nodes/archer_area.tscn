@@ -1,0 +1,81 @@
+[gd_scene load_steps=11 format=1]
+
+[ext_resource path="res://nodes/archer_area.gd" type="Script" id=1]
+[ext_resource path="res://sprites/spr_archer/archer1.png" type="Texture" id=2]
+[ext_resource path="res://sprites/spr_archer/archer2.png" type="Texture" id=3]
+[ext_resource path="res://sprites/spr_archer/archer3.png" type="Texture" id=4]
+[ext_resource path="res://sprites/spr_archer/archer4.png" type="Texture" id=5]
+[ext_resource path="res://sprites/spr_archer/archer_dead.png" type="Texture" id=6]
+[ext_resource path="res://nodes/sfx.tscn" type="PackedScene" id=7]
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 47.3071, -27.4647, 42.3437, 74.5467, 1.17868, 74.5467, 5.91777, -40.5048, 37.1318, -84.2974 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -0.0701141, -83.9327, 37.1318, -84.2974, 5.91777, -40.5048, -0.0701141, -45.6463 )
+
+[sub_resource type="SpriteFrames" id=3]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 4 ), ExtResource( 5 ) ],
+"loop": true,
+"name": "New Anim",
+"speed": 1.5
+} ]
+
+[node name="archer_area" type="Area2D"]
+
+transform/pos = Vector2( -4.8414, 50.1742 )
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, -0.174828 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 5 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, -0.174828 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="archer_sprite" type="AnimatedSprite" parent="."]
+
+frames = SubResource( 3 )
+animation = "New Anim"
+playing = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="archer_dead_sprite" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="archer_shape" type="CollisionPolygon2D" parent="."]
+
+transform/pos = Vector2( 0, -0.174828 )
+build_mode = 0
+polygon = Vector2Array( -0.0701141, -83.9327, -0.0701141, -45.6463, 5.91777, -40.5048, 1.17868, 74.5467, 42.3437, 74.5467, 47.3071, -27.4647, 37.1318, -84.2974 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="sfx" parent="." instance=ExtResource( 7 )]
+
+[connection signal="frame_changed" from="archer_sprite" to="." method="_on_archer_sprite_frame_changed"]
+
+

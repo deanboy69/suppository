@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://nodes/background.gd" type="Script" id=1]
+[ext_resource path="res://sprites/spr_barrenground/barren_ground.png" type="Texture" id=2]
+
+[node name="background" type="KinematicBody2D"]
+
+input/pickable = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+script/script = ExtResource( 1 )
+
+[node name="background_sprite" type="Sprite" parent="."]
+
+visibility/behind_parent = true
+transform/pos = Vector2( 576, 300 )
+z/z = -1
+z/relative = false
+texture = ExtResource( 2 )
+region = true
+region_rect = Rect2( 0, 0, 1152, 600 )
+__meta__ = {
+"_edit_group_": true
+}
+
+

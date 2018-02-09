@@ -1,0 +1,54 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://nodes/bandito_area.gd" type="Script" id=1]
+[ext_resource path="res://sprites/spr_bandito/bandito_left.png" type="Texture" id=2]
+[ext_resource path="res://sprites/spr_bandito/bandito_right.png" type="Texture" id=3]
+[ext_resource path="res://sprites/spr_bandito/bandito_death.png" type="Texture" id=4]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 4.25455, -7.62891, -55.8281, -9.73706, -56.8822, -71.9279, -44.7603, -108.03, -6.5498, -139.126, 14.5318, -80.6241, 29.0255, -27.6565 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.5
+} ]
+
+[node name="bandito_area" type="Area2D"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 59.3186, 51.9135 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+
+[node name="bandito_sprite" type="AnimatedSprite" parent="."]
+
+frames = SubResource( 2 )
+animation = "default"
+frame = 1
+playing = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+transform/pos = Vector2( 59.3186, 51.9135 )
+build_mode = 0
+polygon = Vector2Array( 29.0255, -27.6565, 14.5318, -80.6241, -6.5498, -139.126, -44.7603, -108.03, -56.8822, -71.9279, -55.8281, -9.73706, 4.25455, -7.62891 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="bandito_dead_sprite" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 4 )
+
+

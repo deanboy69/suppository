@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=1]
+
+[ext_resource path="res://nodes/squaw_area.gd" type="Script" id=1]
+[ext_resource path="res://sprites/spr_squaw/squaw_left.png" type="Texture" id=2]
+[ext_resource path="res://sprites/spr_squaw/squaw_right.png" type="Texture" id=3]
+[ext_resource path="res://sprites/spr_squaw/squaw_death.png" type="Texture" id=4]
+[ext_resource path="res://nodes/sfx.tscn" type="PackedScene" id=5]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 30.923, 56.1497, -17.9311, 59.2306, -19.6916, 1.13391, 45.7547, -46.1382 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -7.80814, -93.0532, 27.8356, -101.525, 45.7547, -46.1382, -19.6916, 1.13391, -44.3387, -62.2443, -43.4584, -83.8105 )
+
+[sub_resource type="SpriteFrames" id=3]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.5
+} ]
+
+[node name="squaw_area" type="Area2D"]
+
+transform/pos = Vector2( 444.551, 237.231 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 4, 11 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 2 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 4, 11 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="squaw_sprite" type="AnimatedSprite" parent="."]
+
+frames = SubResource( 3 )
+animation = "default"
+frame = 1
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="squaw_dead_sprite" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="squaw_shape" type="CollisionPolygon2D" parent="."]
+
+transform/pos = Vector2( 4, 11 )
+build_mode = 0
+polygon = Vector2Array( -19.6916, 1.13391, -44.3387, -62.2443, -43.4584, -83.8105, -7.80814, -93.0532, 27.8356, -101.525, 45.7547, -46.1382, 30.923, 56.1497, -17.9311, 59.2306 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="sfx" parent="." instance=ExtResource( 5 )]
+
+

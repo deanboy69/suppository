@@ -1,0 +1,89 @@
+[gd_scene load_steps=11 format=1]
+
+[ext_resource path="res://nodes/Desert_Thirst_Main.gd" type="Script" id=1]
+[ext_resource path="res://nodes/tex.tscn" type="PackedScene" id=2]
+[ext_resource path="res://nodes/background.tscn" type="PackedScene" id=3]
+[ext_resource path="res://nodes/teepee_area.tscn" type="PackedScene" id=4]
+[ext_resource path="res://nodes/cow_skull.tscn" type="PackedScene" id=5]
+[ext_resource path="res://nodes/archer_area.tscn" type="PackedScene" id=6]
+[ext_resource path="res://nodes/squaw_area.tscn" type="PackedScene" id=7]
+[ext_resource path="res://nodes/sfx.tscn" type="PackedScene" id=8]
+[ext_resource path="res://nodes/arrow_area.tscn" type="PackedScene" id=9]
+[ext_resource path="res://nodes/hud.tscn" type="PackedScene" id=10]
+
+[node name="main" type="Node"]
+
+script/script = ExtResource( 1 )
+
+[node name="tex_area" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 66.3457, 55.2713 )
+z/z = 1
+priority = 1.0
+monitorable = false
+collision/layers = 0
+
+[node name="background" parent="." instance=ExtResource( 3 )]
+
+[node name="teepee_area" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 1349, 398 )
+
+[node name="hud" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="teepee_area 2" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 2055, 167 )
+
+[node name="cow_skull" parent="." instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 167, 476 )
+
+[node name="archer_area" parent="." instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 517, 116 )
+
+[node name="squaw_area 2" parent="." instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 297, 417 )
+
+[node name="timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 4.0
+one_shot = true
+autostart = true
+
+[node name="sfx" parent="." instance=ExtResource( 8 )]
+
+[node name="squaw_area 3" parent="." instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 799, 127 )
+
+[node name="squaw_area" parent="." instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 558, 537 )
+
+[node name="squaw_area 4" parent="." instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 220, 42 )
+
+[node name="squaw_area 5" parent="." instance=ExtResource( 7 )]
+
+transform/pos = Vector2( 1428, 135 )
+
+[node name="arrow_area" parent="." instance=ExtResource( 9 )]
+
+transform/pos = Vector2( 667, 113 )
+
+[node name="hud container" parent="." instance=ExtResource( 10 )]
+
+transform/pos = Vector2( 510, 300 )
+z/z = 2
+
+

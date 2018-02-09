@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=1]
+
+[ext_resource path="res://nodes/tex.gd" type="Script" id=1]
+[ext_resource path="res://sprites/spr_tex/tex_right.png" type="Texture" id=2]
+[ext_resource path="res://sprites/spr_tex/tex_left.png" type="Texture" id=3]
+[ext_resource path="res://sprites/spr_tex/tex_dead.png" type="Texture" id=4]
+[ext_resource path="res://nodes/sfx.tscn" type="PackedScene" id=5]
+[ext_resource path="res://nodes/scalp_area.tscn" type="PackedScene" id=6]
+
+[sub_resource type="ConcavePolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+segments = Vector2Array( -42.1857, 31.6514, -43.2612, -29.6498, -43.2612, -29.6498, -24.2614, -40.7629, -24.2614, -40.7629, -0.601257, -37.5365, -0.601257, -37.5365, 10.8703, -22.4801, 10.8703, -22.4801, 5.49304, -15.3104, 5.49304, -15.3104, 11.2288, -8.14063, 11.2288, -8.14063, 11.2288, 31.6514, 11.2288, 31.6514, -42.1857, 31.6514 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "walking",
+"speed": 2.5
+} ]
+
+[node name="tex_area" type="Area2D"]
+
+transform/pos = Vector2( 26.5663, 77.3133 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -8, -20 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+speed = 400
+
+[node name="tex_shape" type="CollisionPolygon2D" parent="."]
+
+transform/pos = Vector2( -8, -20 )
+build_mode = 1
+polygon = Vector2Array( -42.1857, 31.6514, -43.2612, -29.6498, -24.2614, -40.7629, -0.601257, -37.5365, 10.8703, -22.4801, 5.49304, -15.3104, 11.2288, -8.14063, 11.2288, 31.6514 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="tex_sprite" type="AnimatedSprite" parent="."]
+
+visibility/light_mask = 0
+frames = SubResource( 2 )
+animation = "walking"
+playing = true
+
+[node name="tex_dead_sprite" type="Sprite" parent="."]
+
+visibility/visible = false
+texture = ExtResource( 4 )
+
+[node name="muzzle" type="Position2D" parent="."]
+
+transform/pos = Vector2( 81.1718, -50.0699 )
+
+[node name="power_up" type="Position2D" parent="."]
+
+transform/pos = Vector2( -35.8246, -126.713 )
+
+[node name="sfx" parent="." instance=ExtResource( 5 )]
+
+[node name="scalp_area" parent="." instance=ExtResource( 6 )]
+
+visibility/visible = false
+transform/pos = Vector2( -35.8383, -132.764 )
+
+[node name="shot_timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
+[node name="p_timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.8
+one_shot = true
+autostart = true
+
+[connection signal="area_enter" from="." to="." method="_on_tex_area_area_enter"]
+
+[connection signal="timeout" from="shot_timer" to="." method="_on_shot_timer_timeout"]
+
+[connection signal="timeout" from="p_timer" to="." method="_on_p_timer_timeout"]
+
+

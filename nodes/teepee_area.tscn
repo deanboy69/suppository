@@ -1,0 +1,57 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://nodes/teepee_area.gd" type="Script" id=1]
+[ext_resource path="res://sprites/spr_teepee/teepee_left.png" type="Texture" id=2]
+[ext_resource path="res://sprites/spr_teepee/teepee_right.png" type="Texture" id=3]
+[ext_resource path="res://sprites/spr_teepee/teepee.png" type="Texture" id=4]
+[ext_resource path="res://nodes/sfx.tscn" type="PackedScene" id=5]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -11.3636, -175.254, 54.8771, -61.151, 134.509, 162.178, 64.4569, 190.318, -143.903, 160.98 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "default",
+"speed": 2.5
+} ]
+
+[node name="teepee_area" type="Area2D"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0.59874 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+
+[node name="teepee_burn_sprite" type="AnimatedSprite" parent="."]
+
+visibility/visible = false
+frames = SubResource( 2 )
+animation = "default"
+frame = 1
+playing = true
+
+[node name="teepee_sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 4 )
+
+[node name="sfx" parent="." instance=ExtResource( 5 )]
+
+[node name="teepee_shape" type="CollisionPolygon2D" parent="."]
+
+transform/pos = Vector2( 0, 0.59874 )
+build_mode = 0
+polygon = Vector2Array( -11.3636, -175.254, 54.8771, -61.151, 134.509, 162.178, 64.4569, 190.318, -143.903, 160.98 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+
